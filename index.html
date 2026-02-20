@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- APP META -->
+    <!-- ═══════════════════════════════════ -->
+    <title>AI Chiru Reader – Tarot & Astrology Guidance</title>
+    <meta name="description" content="AI-powered Tarot Card Reading, Palm Analysis, Horoscope & Spiritual Guidance App. Explore your cosmic path with calm, symbolic AI interpretations." />
+    <meta name="author" content="AI Chiru Reader" />
+    <meta name="keywords" content="tarot, palm reading, astrology, horoscope, AI guidance, spiritual, zodiac" />
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- PWA & MOBILE META -->
+    <!-- ═══════════════════════════════════ -->
+    <meta name="theme-color" content="#0a0a2e" />
+    <meta name="background-color" content="#0a0a2e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Chiru Reader" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Chiru Reader" />
+    <meta name="msapplication-TileColor" content="#0a0a2e" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- OG / SOCIAL META -->
+    <!-- ═══════════════════════════════════ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AI Chiru Reader – Tarot & Astrology Guidance" />
+    <meta property="og:description" content="Explore your cosmic path with AI-powered Tarot, Palm Reading & Astrology Guidance." />
+    <meta property="og:image" content="/icons/icon-512x512.png" />
+    <meta property="og:url" content="/" />
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- FAVICON & ICONS -->
+    <!-- ═══════════════════════════════════ -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png" />
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- PRECONNECT -->
+    <!-- ═══════════════════════════════════ -->
+    <link rel="preconnect" href="https://openrouter.ai" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- GOOGLE FONTS -->
+    <!-- ═══════════════════════════════════ -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- GOOGLE ADSENSE (Loaded dynamically via adService.js) -->
+    <!-- The script is NOT hardcoded here. -->
+    <!-- It is injected at runtime from env variable -->
+    <!-- VITE_ADSENSE_CLIENT_ID in .env -->
+    <!-- ═══════════════════════════════════ -->
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- CRITICAL CSS (Pre-React render) -->
+    <!-- ═══════════════════════════════════ -->
+    <style>
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      html {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        touch-action: manipulation;
+      }
+
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #0a0a2e;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #ffffff;
+        line-height: 1.6;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #root {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* ──────────────── PRELOADER ──────────────── */
+      .app-preloader {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #0a0a2e 0%, #1a0533 40%, #0d1b3e 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        z-index: 99999;
+        transition: opacity 0.5s ease-out;
+      }
+
+      .app-preloader.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .preloader-orb-container {
+        position: relative;
+        width: 80px;
+        height: 80px;
+      }
+
+      .preloader-orb {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #00f5ff 0%, #7c3aed 45%, #4c1d95 75%, transparent 100%);
+        animation: preloader-pulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        box-shadow: 0 0 40px rgba(0, 245, 255, 0.3), 0 0 80px rgba(124, 58, 237, 0.2);
+      }
+
+      .preloader-ring {
+        position: absolute;
+        inset: -8px;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        border-top-color: rgba(0, 245, 255, 0.6);
+        border-right-color: rgba(124, 58, 237, 0.3);
+        animation: preloader-spin 1.5s linear infinite;
+      }
+
+      .preloader-text {
+        font-family: 'Cinzel', serif;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        animation: preloader-text-pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes preloader-pulse {
+        0%, 100% { transform: scale(0.85); opacity: 0.7; }
+        50% { transform: scale(1.1); opacity: 1; }
+      }
+
+      @keyframes preloader-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      @keyframes preloader-text-pulse {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 0.8; }
+      }
+
+      /* ──────────────── SCROLLBAR (Webkit) ──────────────── */
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(124, 58, 237, 0.4);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(124, 58, 237, 0.6);
+      }
+
+      /* ──────────────── SELECTION ──────────────── */
+      ::selection {
+        background: rgba(124, 58, 237, 0.4);
+        color: #ffffff;
+      }
+
+      /* ──────────────── SAFE AREA (Notch support) ──────────────── */
+      @supports (padding: env(safe-area-inset-top)) {
+        body {
+          padding-top: env(safe-area-inset-top);
+          padding-bottom: env(safe-area-inset-bottom);
+          padding-left: env(safe-area-inset-left);
+          padding-right: env(safe-area-inset-right);
+        }
+      }
+    </style>
+</head>
+<body>
+    <noscript>
+      <div style="background:#0a0a2e;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;font-family:sans-serif;">
+        <div>
+          <h1 style="font-size:24px;margin-bottom:16px;">🔮 AI Chiru Reader</h1>
+          <p style="opacity:0.7;">Please enable JavaScript to use this application.</p>
+        </div>
+      </div>
+    </noscript>
+
+    <div id="root">
+      <!-- Pre-React Preloader (removed after React mounts) -->
+      <div class="app-preloader" id="app-preloader">
+        <div class="preloader-orb-container">
+          <div class="preloader-orb"></div>
+          <div class="preloader-ring"></div>
+        </div>
+        <div class="preloader-text">Chiru Reader</div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

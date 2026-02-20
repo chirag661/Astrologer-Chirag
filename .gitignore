@@ -1,0 +1,69 @@
+# ═══════════════════════════════════════
+# AI Chiru Reader – Git Ignore
+# ═══════════════════════════════════════
+
+# ─── Dependencies ───
+node_modules/
+.pnp
+.pnp.js
+
+# ─── Build Output ───
+dist/
+dist-ssr/
+build/
+*.local
+
+# ─── Environment Variables (NEVER commit) ───
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.env.staging
+
+# ─── Editor / IDE ───
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ─── Logs ───
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ─── Testing ───
+coverage/
+*.lcov
+.nyc_output/
+
+# ─── OS Generated ───
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# ─── PWA Generated ───
+dev-dist/
+sw.js
+workbox-*.js
+
+# ─── Misc ───
+*.tgz
+*.tar.gz
+.cache/
+.temp/
+.tmp/

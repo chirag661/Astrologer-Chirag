@@ -1,0 +1,16 @@
+# ═══════════════════════════════════
+# AI Chiru Reader – robots.txt
+# ═══════════════════════════════════
+
+User-agent: *
+Allow: /
+
+# PWA Service Worker & Assets
+Disallow: /workbox-*
+Disallow: /sw.js
+
+# Source maps (if any)
+Disallow: /*.map$
+
+# Sitemap (add when deployed)
+# Sitemap: https://your-domain.com/sitemap.xml
